@@ -72,37 +72,28 @@ int main() {
 
 	cout << fixed << setprecision(2);
 
-	//creating pointer to first chair object
+	// Create a chair object and call its setters to populate the object's data
 	Chair* chairPtr = new Chair;
 	chairPtr->setLegs(4);
 	chairPtr->setPrices(121.21, 232.32, 414.14);
 	chairPtr->print();
+	delete chairPtr;
+	chairPtr = nullptr;
 
-	//creating dynamic chair object with constructor
-	Chair* livingChair = new Chair(3);
-	livingChair->setPrices(525.25, 434.34, 252.52);
+	// Creating dynamic chair object with the parameter constructor
+	double livingChairPrices[SIZE] = {525.25, 434.34, 252.52};
+	Chair* livingChair = new Chair(3, livingChairPrices);
 	livingChair->print();
 	delete livingChair;
 	livingChair = nullptr;
 
-	// Create a dynamic array of chair objects using the default constructor
+	// Create a dynamic array of chair objects using the default constructor to populate the objects
 	Chair* collection = new Chair[SIZE];
 	const int COLLECTION_SIZE = 3;
 
-	for (int i = 0; i < )
-
-	/*
-	//creating dynamic array of chair objects
-	Chair* collection = new Chair[SIZE];
-	collection[0].setLegs(4);
-	collection[0].setPrices(441.41, 552.52, 663.63);
-	collection[1].setLegs(4);
-	collection[1].setPrices(484.84, 959.59, 868.68);
-	collection[2].setLegs(4);
-	collection[2].setPrices(626.26, 515.15, 757.57);
-	for (int i = 0; i < SIZE; i++)
+	for (int i = 0; i < COLLECTION_SIZE; ++i) {
 		collection[i].print();
-	*/
+	}
 	
 	return 0;
 }
