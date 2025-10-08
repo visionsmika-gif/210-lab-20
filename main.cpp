@@ -3,30 +3,60 @@ Amend the code as follows:
 Change the default constructor. Instead of it assigning null values, we want it to randomly select 3 or 4 legs, and to randomly select prices (including dollars and cents) from $100.00 to $999.99.
 Change the parameter constructor. Now it has just one parameter, the number of legs. Make it have two parameters: number of legs, and an array of 3 doubles (the prices).
 In the third code block (starting at line 67), amend this such that the default constructors are used to populate these objects.
-Exercise your changes in main() with clear, easy-to-understand output. */
+Exercise your changes in main() with clear, easy-to-understand output.
+
+Hint: random doubles? Sure! Try:
+
+const int MIN = 10000, MAX = 99999;
+double price = (rand() % (MAX-MIN+1) + MIN) / (double) 100; */
 
 #include <iostream>
 #include <iomanip>
+#include <cstdlib>
+#include <ctime>
+
 using namespace std;
+
 const int SIZE = 3;
+
 class Chair {
 private:
 	int legs;
 	double* prices;
 public:
-	// constructors
+	// Default constructor
 	Chair() {
+		prices = new double[SIZE];
+		// Randomly select 3 or 4 for legs
+		legs = (rand() % 2) + 3;
+		// Randomly select prices from $100.00 to $999.99.
+		const int MIN = 10000, MAX = 99999;
+		for (int i = 0; i < SIZE; ++i) {
+			prices[i] = (rand() % (MAX - MIN + 1) + MIN) / (double)100;
+		}
+	}
+	// Parameter constructor
+	Chair(int l, double p[]) {
+		prices = new double[SIZE];
+		legs = l;
+		for (int i = 0; i < SIZE; ++i) {
+
+		}
+	}
+
+	/*Chair() {
 		prices = new double[SIZE];
 		legs = 0;
 		for (int i = 0; i < SIZE; i++)
 			prices[i] = 0;
-	}
+	}*/
+	/*
 	Chair(int l) {
 		prices = new double[SIZE];
 		legs = l;
 		for (int i = 0; i < SIZE; i++)
 			prices[i] = 0;
-	}
+	}*/
 	// setters and getters
 	void setLegs(int l) { legs = l; }
 	int getLegs() { return legs; }
@@ -49,6 +79,8 @@ public:
 	}
 };
 int main() {
+	srand(static_cast<unsigned int>(time(0)));	// Seed
+
 	cout << fixed << setprecision(2);
 	//creating pointer to first chair object
 	Chair* chairPtr = new Chair;
